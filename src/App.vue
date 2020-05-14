@@ -5,7 +5,11 @@
       @click-left="routerBack"
       :title="navTitle"
       :left-arrow="!hiddenBackFlag"
-    />
+    >
+      <p slot="right">
+        <span class="exitApp" v-if="showClose" @click.stop="exitApp">关闭</span>
+      </p>
+    </ieach-nav-bar>
     <router-view />
   </div>
 </template>
@@ -17,6 +21,9 @@ export default {
     },
     hiddenBackFlag() {
       return this.$store.state.hiddenBackFlag
+    },
+    showClose() {
+      return localStorage.getItem('env') === 'wisedu'
     },
   },
   mounted() {},
@@ -66,5 +73,12 @@ html {
 .home {
   height: calc(100% - 46px);
   position: relative;
+}
+.exitApp {
+  font-size: 15px;
+  display: inline-block;
+  height: 46px;
+  line-height: 46px;
+  margin-left: 10px;
 }
 </style>
