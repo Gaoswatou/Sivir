@@ -24,6 +24,19 @@ const routes = [
         'oauth'
       ),
   },
+  {
+    path: '/timeout',
+    name: 'timeout',
+    meta: {
+      title: '',
+    },
+    component: (resolve) =>
+      require.ensure(
+        [],
+        () => resolve(require('@/views/ErrPage/timeout')),
+        'errPage'
+      ),
+  },
 ]
 
 const router = new VueRouter({
