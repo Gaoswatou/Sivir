@@ -4,26 +4,30 @@
 > 能使我仰望的，只有天空
 
 ## Desc
+
 h5轻量服务项目脚手架，使用ieach组件库
 
 ## Project setup
-```
+
+```js
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-```
+
+```js
 npm run serve
 ```
 
 ### Compiles and minifies for production
-```
+
+```js
 npm run build
 ```
 
-
 ### Lints and fixes files
-```
+
+```js
 npm run lint
 ```
 
