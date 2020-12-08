@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     redirect: () => {
-      return { path: '/auth', query: { index: 1 } }
+      return { path: '/test', query: { index: 1 } }
     },
   },
   {
@@ -22,6 +22,19 @@ const routes = [
         [],
         () => resolve(require('@/views/Oauth/Oauth')),
         'oauth'
+      ),
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    meta: {
+      title: '',
+    },
+    component: (resolve) =>
+      require.ensure(
+        [],
+        () => resolve(require('@/views/TestPage/index')),
+        'test'
       ),
   },
   {

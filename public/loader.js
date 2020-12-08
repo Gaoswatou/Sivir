@@ -3,11 +3,9 @@ function getAppClient() {
   if (ua.match(/wisedu/i) == 'wisedu') {
     return 'wisedu'
   } else if (ua.match(/wxwork/i) == 'wxwork') {
-    return 'wxwork' //企业微信
-  } else if (ua.match(/QQ/i) == 'qq') {
-    return 'QQ'
-  } else if (ua.match(/AlipayClient/i) == 'alipayclient') {
-    return 'Alipay'
+    return 'wxwork'
+  } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+    return 'wx'
   } else {
     return 'h5'
   }
@@ -26,8 +24,8 @@ if (env === 'wisedu') {
     window._campus = campus
     campus.toggleNavbar({
       show: false, //展示与否，true-展示/false-不展示
-      success: function() {},
-      fail: function() {},
+      success: function () {},
+      fail: function () {},
     })
   })
 } else if (env === 'wxwork') {
