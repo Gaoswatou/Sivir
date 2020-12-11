@@ -7,13 +7,18 @@ import moment from 'moment-timezone'
 import axios from './utils/axios.js'
 import ieach from 'ieach'
 import 'ieach/lib/index.css'
-// import fastClick from 'fastclick'
-// fastClick.attach(document.body)
+import fastClick from 'fastclick'
+if (process.env.NODE_ENV === 'production') {
+  fastClick.attach(document.body)
+}
 
 import * as util from './utils/util.js'
 //调试
+
 import VConsole from 'vconsole'
-new VConsole()
+if (process.env.NODE_ENV === 'development') {
+  new VConsole()
+}
 
 // 将时区设置成亚洲上海
 moment.tz.setDefault('Asia/Shanghai')

@@ -1,11 +1,11 @@
 <template>
-  <div class="page404">
-    <img src="~@/assets/images/404.png" @click="backToRetry" alt="" />
+  <div class="pagetimeout">
+    <img src="~@/assets/images/timeout.png" @click="backToRetry" alt="" />
   </div>
 </template>
 <script>
 export default {
-  name: 'page404',
+  name: 'pagetimeout',
   data() {
     return {}
   },
@@ -19,7 +19,7 @@ export default {
 }
 </script>
 <style lang="scss" scope>
-.page404 {
+.pagetimeout {
   width: 100%;
   height: 100%;
   img {

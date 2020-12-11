@@ -1,49 +1,59 @@
-const autoprefixer = require("autoprefixer");
+const autoprefixer = require('autoprefixer')
 // const pxtorem = require("postcss-pxtorem");
-const postcssPxToViewport = require("postcss-px-to-viewport");
-const path = require("path"); //引入path模块
+const postcssPxToViewport = require('postcss-px-to-viewport')
+const path = require('path') //引入path模块
 function resolve(dir) {
-  return path.join(__dirname, dir); //path.join(__dirname)设置绝对路径
-}
-const environment = require("./config/env"); // 引入获取命令行参数js
-const { getDefaultUrl } = require("./config");
-if (environment.requestHttp == "0") {
-  // 获取默认请求地址
-  environment.requestHttp = getDefaultUrl(environment.stage);
+  return path.join(__dirname, dir) //path.join(__dirname)设置绝对路径
 }
 
+const port = process.env.port || process.env.npm_config_port || 2048 // dev port
 module.exports = {
   // 输出文件目录
-  outputDir: environment.distName === "0" ? "dist" : environment.distName,
-  publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
-  chainWebpack: config => {
+  outputDir: 'dist',
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  chainWebpack: (config) => {
     config.resolve.alias
-      .set("@", resolve("./src"))
-      .set("components", resolve("./src/components"));
+      .set('@', resolve('./src'))
+      .set('components', resolve('./src/components'))
 
-    config.plugin("define").tap(args => {
-      // 将参数传入项目中，可在main.js或者项目中的config,通过process.env 获取
-      args[0]["process.env"].STAGE = JSON.stringify(environment.stage);
-      args[0]["process.env"].URL = JSON.stringify(environment.requestHttp);
-      args[0]["process.env"].PLATFORM = JSON.stringify(environment.platform);
-      return args;
-    });
+    config.plugin('define').tap((args) => {
+      return args
+    })
   },
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "~@/assets/styles/_variable.scss";`
+        prependData: `@import "~@/assets/styles/_variable.scss";`,
       },
       postcss: {
         plugins: [
           autoprefixer(),
           postcssPxToViewport({
             viewportWidth: 375,
-            minPixelValue: 1
+            minPixelValue: 1,
             // selectorBlackList: ["van"]
-          })
-        ]
-      }
-    }
-  }
-};
+          }),
+        ],
+      },
+    },
+  },
+  devServer: {
+    host: 'localhost',
+    port: port,
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: true,
+    },
+    // before: require('./mock/mock-server.js')
+    proxy: {
+      '/api': {
+        target: 'http:/10.168.1.110:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/api',
+        },
+      },
+    },
+  },
+}

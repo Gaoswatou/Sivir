@@ -1,15 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store/index'
-
+import reportRoutes from './report'
 Vue.use(VueRouter)
 
-const routes = [
+const constantRoutes = [
   {
     path: '/',
     redirect: () => {
-      return { path: '/test', query: { index: 1 } }
+      return { path: '/entrance', query: { index: 1 } }
     },
+  },
+  {
+    path: '/entrance',
+    name: 'Entrance',
+    meta: {
+      title: '',
+    },
+    component: (resolve) =>
+      require.ensure(
+        [],
+        () => resolve(require('@/views/entrance/index')),
+        'constant'
+      ),
   },
   {
     path: '/auth',
@@ -21,22 +34,10 @@ const routes = [
       require.ensure(
         [],
         () => resolve(require('@/views/Oauth/Oauth')),
-        'oauth'
+        'constant'
       ),
   },
-  {
-    path: '/test',
-    name: 'Test',
-    meta: {
-      title: '',
-    },
-    component: (resolve) =>
-      require.ensure(
-        [],
-        () => resolve(require('@/views/TestPage/index')),
-        'test'
-      ),
-  },
+
   {
     path: '/timeout',
     name: 'timeout',
@@ -47,10 +48,13 @@ const routes = [
       require.ensure(
         [],
         () => resolve(require('@/views/ErrPage/timeout')),
-        'errPage'
+        'constant'
       ),
   },
 ]
+
+let routes = [...constantRoutes, ...reportRoutes]
+console.log('routes: ', routes)
 
 const router = new VueRouter({
   routes,

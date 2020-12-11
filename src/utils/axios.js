@@ -9,11 +9,11 @@ const axios = Axios.create({
   timeout: TIMEOUT,
 })
 
-axios.defaults.baseURL = process.env.URL
+axios.defaults.baseURL = './'
 
 //请求拦截器
 axios.interceptors.request.use(
-  function(config) {
+  function (config) {
     //是否展示loading
     if (!config.hiddenLoad) {
       toast = Toast.loading({
@@ -41,7 +41,7 @@ axios.interceptors.request.use(
 
     return config
   },
-  function(error) {
+  function (error) {
     // 对请求错误做些什么
     return Promise.reject(error)
   }
@@ -49,7 +49,7 @@ axios.interceptors.request.use(
 
 //响应拦截器
 axios.interceptors.response.use(
-  function(res) {
+  function (res) {
     // 对响应数据做点什么
     setTimeout(() => {
       toast && toast.clear()
@@ -66,7 +66,7 @@ axios.interceptors.response.use(
       return Promise.reject(res.data.message)
     }
   },
-  function(err) {
+  function (err) {
     console.log('err: ', err)
     if (err.code == 'ECONNABORTED' && err.message.indexOf('timeout') != -1) {
       // 对超时错误进行处理
@@ -96,14 +96,14 @@ axios.interceptors.response.use(
       config.__retryCount += 1
 
       // Create new promise to handle exponential backoff
-      var backoff = new Promise(function(resolve) {
-        setTimeout(function() {
+      var backoff = new Promise(function (resolve) {
+        setTimeout(function () {
           resolve()
         }, config.retryDelay || 1)
       })
 
       // Return the promise in which recalls axios to retry the request
-      return backoff.then(function() {
+      return backoff.then(function () {
         return axios(config)
       })
     } else {

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { JssdkMixins } from '@/utils/mixins'
+import { JssdkMixins } from '@/utils/jssdkMixins'
 export default {
   name: 'TestPage',
   mixins: [JssdkMixins],
