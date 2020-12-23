@@ -51,9 +51,26 @@ const constantRoutes = [
         'constant'
       ),
   },
+  {
+    path: '/404',
+    name: '404',
+    meta: {
+      title: '',
+    },
+    component: (resolve) =>
+      require.ensure(
+        [],
+        () => resolve(require('@/views/ErrPage/404')),
+        'constant'
+      ),
+  },
 ]
 
-let routes = [...constantRoutes, ...reportRoutes]
+let routes = [
+  ...constantRoutes,
+  ...reportRoutes,
+  { path: '*', redirect: '/404' },
+]
 console.log('routes: ', routes)
 
 const router = new VueRouter({
