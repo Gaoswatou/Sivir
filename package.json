@@ -30,7 +30,7 @@
     "ieach": "0.1.1",
     "js-md5": "^0.7.3",
     "lib-flexible": "^0.3.2",
-    "moment-timezone": "^0.5.31",
+    "moment-timezone": "^0.5.35",
     "postcss-px-to-viewport": "^1.1.1",
     "postcss-pxtorem": "^5.1.1",
     "prettier": "^2.0.5",
